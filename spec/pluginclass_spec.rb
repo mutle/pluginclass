@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 class TestClass
-  include PluginClass
+  extend PluginClass
 end
 
 describe "PluginClass" do

@@ -55,7 +55,7 @@ module PluginClass
       @plugin_classes ||= {}
     end
 
-    def included(mod)
+    def extended(mod)
       super(mod)
       proxy = Proxy.new(mod)
       name = mod.name
