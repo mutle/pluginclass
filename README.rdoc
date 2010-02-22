@@ -1,9 +1,28 @@
 = pluginclass
 
-Description goes here.
+    class SomeClass
+      include PluginClass
+    end
+
+    >> SomeClass.new.foo
+    NoMethodError: undefined method `foo' for #<SomeClass:0x10162b630>
+
+    PluginClass.extend_class "SomeClass" do
+      def foo
+        "foo"
+      end
+    end
+    >> SomeClass.new.foo
+    => "foo"
+
+    >> SomeClass.reset_class
+
+    >> SomeClass.new.foo
+    NoMethodError: undefined method `foo' for #<SomeClass:0x101618030>
+
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a

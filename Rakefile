@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "pluginclass"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A subclass Factory}
+    gem.description = %Q{}
     gem.email = "mutwin.kraus@gmail.com"
     gem.homepage = "http://github.com/mutle/pluginclass"
     gem.authors = ["Mutwin Kraus"]
