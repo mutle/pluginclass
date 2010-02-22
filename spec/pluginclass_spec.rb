@@ -1,11 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
+class TestClass
+  include PluginClass
+end
+
 describe "PluginClass" do
 
   it "adds and removes features from class" do
-    class TestClass
-      include PluginClass
-    end
     TestClass.new.should_not respond_to(:foo)
 
     PluginClass.extend_class "TestClass" do
@@ -20,47 +21,38 @@ describe "PluginClass" do
   end
 
   it "supports instance_of" do
-    class TestClass2
-      include PluginClass
-    end
-    true.should_not be_instance_of(TestClass2)
-    [].should_not be_instance_of(TestClass2)
-    {}.should_not be_instance_of(TestClass2)
+    true.should_not be_instance_of(TestClass)
+    [].should_not be_instance_of(TestClass)
+    {}.should_not be_instance_of(TestClass)
 
-    TestClass2.new.should be_instance_of(TestClass2)
-    PluginClass.extend_class "TestClass2" do
+    TestClass.new.should be_instance_of(TestClass)
+    PluginClass.extend_class "TestClass" do
     end
-    TestClass2.new.should be_instance_of(TestClass2)
-    TestClass2.reset_class
-    TestClass2.new.should be_instance_of(TestClass2)
+    TestClass.new.should be_instance_of(TestClass)
+    TestClass.reset_class
+    TestClass.new.should be_instance_of(TestClass)
   end
 
   it "supports is_a" do
-    class TestClass3
-      include PluginClass
-    end
-    true.should_not be_is_a(TestClass3)
-    [].should_not be_is_a(TestClass3)
-    {}.should_not be_is_a(TestClass3)
+    true.should_not be_is_a(TestClass)
+    [].should_not be_is_a(TestClass)
+    {}.should_not be_is_a(TestClass)
 
-    TestClass3.new.should be_is_a(TestClass3)
-    PluginClass.extend_class "TestClass3" do
+    TestClass.new.should be_is_a(TestClass)
+    PluginClass.extend_class "TestClass" do
     end
-    TestClass3.new.should be_is_a(TestClass3)
-    TestClass3.reset_class
-    TestClass3.new.should be_is_a(TestClass3)
+    TestClass.new.should be_is_a(TestClass)
+    TestClass.reset_class
+    TestClass.new.should be_is_a(TestClass)
   end
 
   it "returns the root klasses name" do
-    class TestClass4
-      include PluginClass
-    end
-    TestClass4.new.class.name.should == "TestClass4"
+    TestClass.new.class.name.should == "TestClass"
     PluginClass.extend_class "PluginClass4" do
     end
-    TestClass4.new.class.name.should == "TestClass4"
-    TestClass4.reset_class
-    TestClass4.new.class.name.should == "TestClass4"
+    TestClass.new.class.name.should == "TestClass"
+    TestClass.reset_class
+    TestClass.new.class.name.should == "TestClass"
   end
 
 end
