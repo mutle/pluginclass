@@ -22,11 +22,16 @@ module PluginClass
     def initialize(klass)
       @root_klass = @current_klass = klass
       @extended = false
+      class << klass
+        attr_accessor :root_klass
+      end
+      klass.root_klass = @root_klass
     end
 
     def extend_class(&block)
       unless @extended
         @current_klass = Class.new(@root_klass)
+        @current_klass.root_klass = @root_klass
         @extended = true
       end
       @current_klass.class_eval &block
@@ -64,6 +69,11 @@ module PluginClass
       Object.const_set(name, proxy)
     end
   end
+
+  def name
+    self.root_klass && self.root_klass != self ? self.root_klass.name : super
+  end
+
 
 end
 

@@ -48,7 +48,7 @@ describe "PluginClass" do
 
   it "returns the root klasses name" do
     TestClass.new.class.name.should == "TestClass"
-    PluginClass.extend_class "PluginClass4" do
+    PluginClass.extend_class "TestClass" do
     end
     TestClass.new.class.name.should == "TestClass"
     TestClass.reset_class
